@@ -15,7 +15,7 @@ import pickle
 from sklearn.model_selection import train_test_split
 #%%
 # Importing the dataset
-dataset = pd.read_csv('../dataset/DSL-StrongPasswordData.csv')
+dataset = pd.read_csv('../dataset/appended/DSL-StrongPasswordData.csv')
 
 subjects = dataset["subject"].unique()
 
@@ -60,12 +60,12 @@ y_test = np.delete(y_test, (0), axis=0)
 #%%
 
 # Feature Scaling
-from sklearn.preprocessing import StandardScaler
-sc = StandardScaler()
-X_train = sc.fit_transform(X_train)
-X_test = sc.transform(X_test)
-
-print(X_train.shape)
+#from sklearn.preprocessing import StandardScaler
+#sc = StandardScaler()
+#X_train = sc.fit_transform(X_train)
+#X_test = sc.transform(X_test)
+#
+#print(X_train.shape)
 #%%
 # =============================================================================
 # # Fitting Random Forest Classification to the Training set
@@ -103,13 +103,13 @@ def build_model():
     model.add(Dropout(0.3))
     model.add(Dense(90, activation='relu'))
     model.add(Dropout(0.3))
-    model.add(Dense(51, activation='softmax'))
+    model.add(Dense(53, activation='softmax'))
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     model.summary()
     return model
 
 print("Compile model ...")
-estimator = KerasClassifier(build_fn=build_model, epochs=200, batch_size=128)
+estimator = KerasClassifier(build_fn=build_model, epochs=300, batch_size=256)
 estimator.fit(X_train, y_train)
 
 # Predictions 
@@ -171,3 +171,5 @@ print("jaccard_similarity_score :: ",f1_score(y_test,y_pred,average="weighted"))
 # random_forest_classifier_pkl.close()
 # 
 # =============================================================================
+
+estimator.model.save("../saved-models/ann.h5")
