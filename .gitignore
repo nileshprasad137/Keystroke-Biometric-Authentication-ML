@@ -1,2 +1,4 @@
 *.pyc
 *.pkl
+*.h5
+./saved-models/*
