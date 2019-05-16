@@ -55,8 +55,6 @@ def kb_up_event(event):
         # print("This key is not to be recorded : ", event.Key)
         pass
 
-user_name = input("Enter your name: ")
-
 # Create hookmanager
 hookman = pyxhook.HookManager()
 # Define our callback to fire when a key is pressed down
@@ -150,7 +148,7 @@ while password_entry_count <= frequency_password_entry:
         print("Password entered was not correct! Please type \'{}\' again !".format(password))
 
 user_keystroke_timings_json["timings"] = user_keystroke_timings_list
-user_keystroke_timings_json["user"] = user_name
+# user_keystroke_timings_json["user"] = user_name
 print(json.dumps(user_keystroke_timings_json))
 
 

@@ -103,7 +103,7 @@ def build_model():
     model.add(Dropout(0.3))
     model.add(Dense(90, activation='relu'))
     model.add(Dropout(0.3))
-    model.add(Dense(53, activation='softmax'))
+    model.add(Dense(56, activation='softmax'))
     model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
     model.summary()
     return model
